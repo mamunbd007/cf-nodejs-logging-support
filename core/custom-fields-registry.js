@@ -5,7 +5,7 @@ class CustomFieldsRegistry {
     }
 
     // Registers a (white)list of allowed custom field names
-    registerCustomFields(fieldNames) {
+    register(fieldNames) {
         this.registeredCustomFields = [];
 
         if (!Array.isArray(fieldNames)) return false;
@@ -25,7 +25,7 @@ class CustomFieldsRegistry {
     }
 
     // Testing if a given field is registered
-    isRegisteredField(fieldName) {
+    isRegistered(fieldName) {
         if (typeof(fieldName) == "string") {
             if (this.registeredCustomFields.includes(fieldName)) {
                 return true;
