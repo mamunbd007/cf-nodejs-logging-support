@@ -44,7 +44,7 @@ class Logger {
             return false;
         }
 
-        args.pop();
+        args.shift();
 
         var customFieldsFromArgs = {};
         if (typeof args[args.length - 1] === "object") {
