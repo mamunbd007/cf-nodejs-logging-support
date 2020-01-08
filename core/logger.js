@@ -1,4 +1,5 @@
 const levels = require("./logging-levels");
+const customFieldsRegistry = require("./custom-fields-registry");
 
 class Logger {
     constructor(isRoot, parent) {
@@ -8,7 +9,7 @@ class Logger {
         this.customFields = {};
     }
 
-    setLoggingLevel(levelName) { 
+    setLoggingLevel(levelName) {
         if (levelName == null && !this.isRoot) {
             this.loggingLevel = null;
             return true;
@@ -35,9 +36,11 @@ class Logger {
         return false;
     }
 
-    logMessage() { }
+    logMessage() {
 
-    createLogger(customFields) { 
+    }
+
+    createLogger(customFields) {
         var logger = new Logger(false, this);
         if (customFields != null) {
             logger.setCustomFields(customFields);
@@ -45,7 +48,7 @@ class Logger {
         return logger;
     }
 
-    setCustomFields(customFields) { 
+    setCustomFields(customFields) {
         if (utils.isValidObject(customFields, true)) {
             this.customFields = customFields;
             return true;

@@ -1,6 +1,6 @@
 const Logger = require("./logger");
 const NetworkLogger = require("./root-logger");
-const customFieldRegistry = require("./custom-field-registry");
+const customFieldsRegistry = require("./custom-fields-registry");
 
 class RootLogger extends Logger {
     constructor() {
@@ -10,7 +10,7 @@ class RootLogger extends Logger {
     setConfig(config) { }
 
     registerCustomFields(fieldNames) { 
-        customFieldRegistry.register(fieldNames)
+        customFieldsRegistry.register(fieldNames)
     }
 
     logNetwork(req, res, next) {

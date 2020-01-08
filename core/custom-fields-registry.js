@@ -1,4 +1,3 @@
-
 class CustomFieldsRegistry {
     constructor() {
         this.registeredCustomFields = [];

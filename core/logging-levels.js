@@ -19,12 +19,12 @@ class Levels {
 
     getLevelValueByName(name) {
         if (name == null) return null;
-        return (LOGGING_LEVELS[name.toLowerCase()] != undefined) ? LOGGING_LEVELS[name.toLowerCase()] : null;
+        return (LEVELS[name.toLowerCase()] != undefined) ? LEVELS[name.toLowerCase()] : null;
     }
 
     getLevelNameByValue(value) {
-        for (var key in LOGGING_LEVELS) {
-            if (LOGGING_LEVELS[key] == value) {
+        for (var key in LEVELS) {
+            if (LEVELS[key] == value) {
                 return key;
             }
         }

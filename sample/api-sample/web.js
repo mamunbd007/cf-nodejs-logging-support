@@ -19,5 +19,5 @@ app.use("/", express.static(__dirname + "/public"));
 // set port and run server
 var port = Number(process.env.VCAP_APP_PORT || 8080);
 app.listen(port, function () {
-    log.info("listening on port: %d", port);
+    log.logMessage("info", "listening on port: %d", port);
 });
