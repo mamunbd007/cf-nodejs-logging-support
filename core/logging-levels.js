@@ -1,3 +1,4 @@
+
 const LEVELS = {
     "error": 0,
     "warn": 1,
@@ -7,36 +8,34 @@ const LEVELS = {
     "silly": 5
 }
 
-function getLevels() {
-    return LEVELS;
-}
-
-function getDefaultLevelValue() {
-    return LEVELS.info;
-}
-
-function getLevelValueByName(name) {
-    if (name == null) return null;
-    return (LOGGING_LEVELS[name.toLowerCase()] != undefined) ? LOGGING_LEVELS[name.toLowerCase()] : null;
-}
-
-function getLevelNameByValue(value) {
-    for (var key in LOGGING_LEVELS) {
-        if (LOGGING_LEVELS[key] == value) {
-            return key;
-        }
+class Levels {
+    getLevels() {
+        return LEVELS;
     }
-    return null;
+
+    getDefaultLevelValue() {
+        return LEVELS.info;
+    }
+
+    getLevelValueByName(name) {
+        if (name == null) return null;
+        return (LOGGING_LEVELS[name.toLowerCase()] != undefined) ? LOGGING_LEVELS[name.toLowerCase()] : null;
+    }
+
+    getLevelNameByValue(value) {
+        for (var key in LOGGING_LEVELS) {
+            if (LOGGING_LEVELS[key] == value) {
+                return key;
+            }
+        }
+        return null;
+    }
+
+    checkThreshold(levelVal, thresholdVal) {
+        return levelVal <= thresholdVal;
+    }
 }
 
-function checkThreshold(levelVal, thresholdVal) {
-    return levelVal <= thresholdVal;
-}
-
-exports.getLevels = getLevels;
-exports.getDefaultLevel = getDefaultLevel;
-exports.getLevelValueByName = getLevelValueByName;
-exports.getLevelNameByValue = getLevelNameByValue;
-exports.getDefaultLevelValue = getDefaultLevelValue;
-exports.checkThreshold = checkThreshold;
+var levels = new Levels();
+module.exports = levels;
 

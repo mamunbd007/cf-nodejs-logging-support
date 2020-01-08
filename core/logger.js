@@ -24,30 +24,25 @@ class Logger {
     }
 
     getLoggingLevel() {
-        return levels.getLevelNameByValue(this.getLoggingLevelValue())
+        return levels.getLevelNameByValue(this._getLoggingLevelValue())
     }
 
-    getLoggingLevelValue() {
-        if (this.isRoot || this.loggingLevel != null) {
-            return this.loggingLevel
-        } else {
-            return this.parent.getLoggingLevelValue();
-        }
-    }
-
-    logMessage() { }
-
-    isLogLevel(levelName) {
+    isLoggingLevel(levelName) {
         var level = levels.getLevelValueByName(levelName);
         if (level != null) {
-            return levels.checkThreshold(level, this.getLoggingLevelValue());
+            return levels.checkThreshold(level, this._getLoggingLevelValue());
         }
         return false;
     }
 
+    logMessage() { }
+
     createLogger(customFields) { 
         var logger = new Logger(false, this);
-        logger.setCustomFields(customFields);
+        if (customFields != null) {
+            logger.setCustomFields(customFields);
+        }
+        return logger;
     }
 
     setCustomFields(customFields) { 
@@ -61,6 +56,15 @@ class Logger {
     getField(name) { }
 
     setField(name, value) { }
+
+    _getLoggingLevelValue() {
+        if (this.isRoot || this.loggingLevel != null) {
+            return this.loggingLevel
+        } else {
+            return this.parent._getLoggingLevelValue();
+        }
+    }
+
 }
 
 module.exports = Logger
