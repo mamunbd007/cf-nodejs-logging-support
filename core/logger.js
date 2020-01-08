@@ -1,5 +1,5 @@
 const levels = require("./logging-levels");
-const customFieldsRegistry = require("./custom-fields-registry");
+const logFactory = require("./log-factory");
 
 class Logger {
     constructor(isRoot, parent) {
@@ -37,7 +37,39 @@ class Logger {
     }
 
     logMessage() {
+        var args = Array.prototype.slice.call(arguments);
+        var level = args[0];
 
+        if (!levels.checkThreshold(levels.getLevelValueByName(level)), this.getLoggingLevelValue()) {
+            return false;
+        }
+
+        args.pop();
+
+        var customFieldsFromArgs = {};
+        if (typeof args[args.length - 1] === "object") {
+            if (utils.isValidObject(args[args.length - 1])) {
+                customFieldsFromArgs = args[args.length - 1];
+            }
+            args.pop();
+        }
+    
+        var msg = util.format.apply(util, args);
+
+        var log = logFactory.createLog();
+
+        var customFields = {..._getOwnAndAncestorsCustomFields(), ...customFieldsFromArgs}
+        
+        log.addData({
+            level: level,
+            msg: msg
+        }, true)
+
+        log.addCustomFields(customFields);
+
+        console.log(JSON.parse(log.getData()));
+
+        return true;
     }
 
     createLogger(customFields) {
@@ -65,6 +97,14 @@ class Logger {
             return this.loggingLevel
         } else {
             return this.parent._getLoggingLevelValue();
+        }
+    }
+
+    _getOwnAndAncestorsCustomFields() {
+        if (this.isRoot) {
+            return this.customFields;
+        } else {
+            return {...this.parent._getOwnAndAncestorsCustomFields(), ...this.customFields}
         }
     }
 
