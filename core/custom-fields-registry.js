@@ -34,3 +34,6 @@ class CustomFieldsRegistry {
         return false;
     }
 }
+
+var customFieldsRegistry = new CustomFieldsRegistry();
+module.exports = customFieldsRegistry;
