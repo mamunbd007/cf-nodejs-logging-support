@@ -1,5 +1,6 @@
 const uuid = require("uuid/v4");
 const util = require("util");
+const utils = require("./utils");
 
 const levels = require("./logging-levels");
 const logFactory = require("./log-factory");
