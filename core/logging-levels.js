@@ -8,34 +8,34 @@ const LEVELS = {
     "silly": 5
 }
 
-class Levels {
-    getLevels() {
-        return LEVELS;
-    }
+var getLevels = function () {
+    return LEVELS;
+};
 
-    getDefaultLevelValue() {
-        return LEVELS.info;
-    }
-
-    getLevelValueByName(name) {
-        if (name == null) return null;
-        return (LEVELS[name.toLowerCase()] != undefined) ? LEVELS[name.toLowerCase()] : null;
-    }
-
-    getLevelNameByValue(value) {
-        for (var key in LEVELS) {
-            if (LEVELS[key] == value) {
-                return key;
-            }
-        }
-        return null;
-    }
-
-    checkThreshold(levelVal, thresholdVal) {
-        return levelVal <= thresholdVal;
-    }
+var getDefaultLevelValue = function () {
+    return LEVELS.info;
 }
 
-var levels = new Levels();
-module.exports = levels;
+var getLevelValueByName = function (name) {
+    if (name == null) return null;
+    return (LEVELS[name.toLowerCase()] != undefined) ? LEVELS[name.toLowerCase()] : null;
+}
 
+var getLevelNameByValue = function (value) {
+    for (var key in LEVELS) {
+        if (LEVELS[key] == value) {
+            return key;
+        }
+    }
+    return null;
+}
+
+var checkThreshold = function(levelVal, thresholdVal) {
+    return levelVal <= thresholdVal;
+}
+
+exports.getLevels = getLevels;
+exports.getDefaultLevelValue = getDefaultLevelValue;
+exports.getLevelValueByName = getLevelValueByName;
+exports.getLevelNameByValue = getLevelNameByValue;
+exports.checkThreshold = checkThreshold;
