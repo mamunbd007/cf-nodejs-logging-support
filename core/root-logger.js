@@ -4,7 +4,10 @@ const customFieldsRegistry = require("./custom-fields-registry");
 
 class RootLogger extends Logger {
     constructor() {
-        super(true, null);
+        super(true, null, {});
+
+        // Root logger does not have correlationData
+        this.correlationData = null;
     }
 
     setConfig(config) { }
