@@ -42,6 +42,11 @@ var resolveNestedVar = function (root, path) {
     return value;
 };
 
+var handleDefault = function(value, defaultValue) {
+    return value != null ? value : defaultValue;
+}
+
 
 exports.isValidObject = isValidObject;
 exports.resolveNestedVar = resolveNestedVar;
+exports.handleDefault = handleDefault;

@@ -21,4 +21,8 @@ logFactory.setBaseLog({
     logger: "nodejs-logger",
 });
 
+rootLogger.logNetwork = function(req, res, next) {
+    rootLogger._logNetwork(req, res, next)
+}
+
 module.exports = rootLogger;

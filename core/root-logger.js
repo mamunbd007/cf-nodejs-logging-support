@@ -1,5 +1,5 @@
 const Logger = require("./logger");
-const NetworkLogger = require("./root-logger");
+const NetworkLogger = require("./network-logger");
 const customFieldsRegistry = require("./custom-fields-registry");
 
 class RootLogger extends Logger {
@@ -16,14 +16,14 @@ class RootLogger extends Logger {
         customFieldsRegistry.register(fieldNames)
     }
 
-    logNetwork(req, res, next) {
-        var networkLogger = new NetworkLogger(this);
-        networkLogger.logNetwork(req, res, next);
-    }
-
     setSinkFunction(fct) {}
 
     createWinstonTransport() {}
+
+    _logNetwork(req, res, next) {
+        var networkLogger = new NetworkLogger(this);
+        networkLogger.logNetwork(req, res, next);
+    }
 }
 
 module.exports = RootLogger

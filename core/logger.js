@@ -84,6 +84,7 @@ class Logger {
         // add custom field data to log
         log.addCustomFieldData({...this._getOwnAndAncestorsCustomFields(), ...customFieldsFromArgs});
 
+        // TODO: use proper writer
         console.log(JSON.stringify(log.getData()));
 
         return true;

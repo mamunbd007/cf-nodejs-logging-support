@@ -67,7 +67,7 @@ class Log {
 
         if (Object.keys(customFields).length > 0) {
             this.addData({
-                customFields: customFields
+                custom_fields: customFields
             }, true);
         }
 
