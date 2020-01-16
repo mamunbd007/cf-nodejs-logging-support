@@ -18,6 +18,7 @@ app.use(log.logNetwork);
 app.use("/", express.static(__dirname + "/public"));
 
 app.get("/test", function(req, res) {
+    req.logger.info("Received request /test");
     res.send("OK");
 });
 
