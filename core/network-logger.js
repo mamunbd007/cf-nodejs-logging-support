@@ -34,15 +34,15 @@ class NetworkLogger extends Logger {
             level: LOG_LEVEL,
             request: wReq.getURL(constants.DEFAULT_SIGN),
             method: wReq.getMethod(constants.DEFAULT_SIGN),
-            remote_host: wReq.getRemoteHost(constants.DEFAULT_SIGN), // TODO: ENV LOG_SENSITIVE_CONNECTION_DATA
-            remote_ip: wReq.getRemoteHost(constants.DEFAULT_SIGN), // TODO: ENV LOG_SENSITIVE_CONNECTION_DATA
-            remote_port: wReq.getRemotePort(constants.DEFAULT_SIGN), // TODO: ENV LOG_SENSITIVE_CONNECTION_DATA
-            remote_user: wReq.getHeader("remote-user", constants.DEFAULT_SIGN), // TODO: ENV LOG_REMOTE_USER
+            remote_host: wReq.getRemoteHost(constants.DEFAULT_SIGN, constants.ENV_LOG_SENSITIVE_CONNECTION_DATA),
+            remote_ip: wReq.getRemoteHost(constants.DEFAULT_SIGN, constants.ENV_LOG_SENSITIVE_CONNECTION_DATA),
+            remote_port: wReq.getRemotePort(constants.DEFAULT_SIGN, constants.ENV_LOG_SENSITIVE_CONNECTION_DATA),
+            remote_user: wReq.getHeader("remote-user", constants.DEFAULT_SIGN, constants.ENV_LOG_REMOTE_USER),
             request_received_at: this.log.data.written_at,
             request_size_b: wReq.getHeader("content-length", -1),
             protocol: wReq.getProtocol(),
-            referer: wReq.getHeader("referer", constants.DEFAULT_SIGN), // TODO: ENV LOG_REFERER
-            x_forwarded_for: wReq.getHeader("x-forwarded-for", ""), // TODO: ENV LOG_SENSITIVE_CONNECTION_DATA
+            referer: wReq.getHeader("referer", constants.DEFAULT_SIGN, constants.ENV_LOG_REFERER),
+            x_forwarded_for: wReq.getHeader("x-forwarded-for", "", constants.ENV_LOG_SENSITIVE_CONNECTION_DATA),
             correlation_id: this.correlationData.correlation_id,
             tenant_id: this.correlationData.tenant_id,
             request_id: this.correlationData.request_id,
@@ -92,9 +92,9 @@ class NetworkLogger extends Logger {
     }
 
     _createCorrelationData(wReq) {
-        var requestId = wReq.getHeader("x-vcap-request-id", DEFAULT_DASH);
-        var tenantId = wReq.getHeader("tenantid", DEFAULT_DASH);
-        var correlationId = wReq.getHeader("x-correlationid", (requestId != null && requestId != DEFAULT_DASH) ? requestId : uuid());
+        var requestId = wReq.getHeader("x-vcap-request-id", constants.DEFAULT_SIGN);
+        var tenantId = wReq.getHeader("tenantid", constants.DEFAULT_SIGN);
+        var correlationId = wReq.getHeader("x-correlationid", (requestId != null && requestId != constants.DEFAULT_SIGN) ? requestId : uuid());
 
         return {
             correlation_id: correlationId,

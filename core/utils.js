@@ -1,3 +1,6 @@
+const envHelper = require("./environment-helper");
+const constants = require("./constants");
+
 // checks if the given argument is a non-empty instance of Object
 var isValidObject = function (obj, canBeEmpty) {
     if (obj === null || obj === undefined) {
@@ -42,8 +45,18 @@ var resolveNestedVar = function (root, path) {
     return value;
 };
 
-var handleDefault = function(value, defaultValue) {
-    return value != null ? value : defaultValue;
+// Return value, if it is not null. Otherwise return defaultValue. If an envVarSwitch has been given, 
+// check if corresponding env var is set to true and return redaction placeholer otherwise.
+var handleDefault = function(value, defaultValue, envVarSwitch) {
+    var v = (value != null ? value : defaultValue);
+
+    if (envVarSwitch != null) {
+        if (!envHelper.isEnabled(envVarSwitch) && value != null) {
+            return constants.REDACTION_PLACEHOLDER
+        }
+    }
+
+    return v
 }
 
 

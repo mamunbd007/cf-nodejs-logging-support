@@ -18,9 +18,9 @@ class ExpressRequestWrapper extends IRequestWrapper {
         }
     }
 
-    getHeader(name, defaultValue) {
+    getHeader(name, defaultValue, envVarSwitch) {
         var value = this.req.header(name);
-        return utils.handleDefault(value, defaultValue);
+        return utils.handleDefault(value, defaultValue, envVarSwitch);
     }
 
     getURL(defaultValue) {
@@ -33,15 +33,15 @@ class ExpressRequestWrapper extends IRequestWrapper {
         return utils.handleDefault(value, defaultValue);
     }
 
-    getRemoteHost(defaultValue) {
+    getRemoteHost(defaultValue, envVarSwitch) {
         var value = this.req.connection.remoteAddress;
-        return utils.handleDefault(value, defaultValue);
+        return utils.handleDefault(value, defaultValue, envVarSwitch);
     }
 
-    getRemotePort(defaultValue) {
+    getRemotePort(defaultValue, envVarSwitch) {
         var port = this.req.connection.remotePort;
         var value = port != null ? port.toString() : null; 
-        return utils.handleDefault(value, defaultValue);
+        return utils.handleDefault(value, defaultValue, envVarSwitch);
     }
 
     getProtocol() {

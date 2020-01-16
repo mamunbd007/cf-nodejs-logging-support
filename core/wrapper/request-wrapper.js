@@ -5,7 +5,7 @@ class IRequestWrapper {
         this.req = req;
     }
 
-    getHeader(name, defaultValue) {
+    getHeader(name, defaultValue, envVarSwitch) {
         throw new Error('Method has to be implemented in subclass');
     }
 
@@ -17,11 +17,11 @@ class IRequestWrapper {
         throw new Error('Method has to be implemented in subclass');
     }
 
-    getRemoteHost(defaultValue) {
+    getRemoteHost(defaultValue, envVarSwitch) {
         throw new Error('Method has to be implemented in subclass');
     }
 
-    getRemotePort(defaultValue) {
+    getRemotePort(defaultValue, envVarSwitch) {
         throw new Error('Method has to be implemented in subclass');
     }
 

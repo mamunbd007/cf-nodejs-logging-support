@@ -25,7 +25,7 @@ class CustomFieldsRegistry {
 
     // Testing if a given field is registered
     isRegistered(fieldName) {
-        if (typeof(fieldName) == "string") {
+        if (typeof fieldName == "string") {
             if (this.registeredCustomFields.includes(fieldName)) {
                 return true;
             }

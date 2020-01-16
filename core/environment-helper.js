@@ -1,7 +1,7 @@
 const utils = require("./utils");
 
 // Resolves nested and top-level environment variables
-var resolve = function(path, defaultValue) {
+var resolve = function (path, defaultValue) {
     var pathArr;
     if (typeof path === "string") {
         pathArr = [path];
@@ -20,4 +20,14 @@ var resolve = function(path, defaultValue) {
     return defaultValue;
 }
 
+// Checks if env var with given name is set to true
+var isEnabled = function (name) {
+    var val = process.env[name];
+    if (val && typeof val == "string") {
+        return (val.toLowerCase() == "true");
+    }
+    
+}
+
 exports.resolve = resolve;
+exports.isEnabled = isEnabled;
